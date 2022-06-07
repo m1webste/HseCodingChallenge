@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Brown High Heels",
+    "category": "Shoes",
+    "price": 99.99,
+    "defaultCurrency": "euro"
+  },
+  {
+    "name": "Yellow Jacket",
+    "category": "Apparell",
+    "price": 239.99,
+    "defaultCurrency": "usd"
+  }
+]
