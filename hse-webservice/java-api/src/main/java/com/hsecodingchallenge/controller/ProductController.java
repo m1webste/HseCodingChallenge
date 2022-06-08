@@ -22,10 +22,7 @@ public class ProductController {
 
     @PostMapping
     public Product saveProduct(@RequestBody Product product) {
-        System.out.println(product);
-        Product dumbProduct = new Product(new Long(10), "dummy", new Long(10), 10.0);
-        System.out.println(dumbProduct);
-        return productRepository.save(dumbProduct);
+        return productRepository.save(product);
     }
 
     @GetMapping

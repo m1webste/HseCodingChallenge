@@ -2,17 +2,9 @@ package com.hsecodingchallenge.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "Product")
 @Entity
 public class Product {
@@ -23,7 +15,6 @@ public class Product {
     private String name;
     private Long categoryId;
     private double price;
-    //private String defaultCurrency; string or what?
 
     public Product(){
 
@@ -46,4 +37,38 @@ public class Product {
     public String toString(){
         return "{id: " + id + ", name: " + name + ", categoryId: " + categoryId + ", price: " + price + "}";
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
+    
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+
 }
