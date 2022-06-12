@@ -11,9 +11,8 @@ class ProductList extends Component {
         }
     }
 
-    findAllProducts = e => {
-        e.preventDefault()
-        console.log(`Attempting to retrieve all products from the AWS DB`)
+    doGetRequest()
+    {
         axios.get('http://ec2-54-93-231-12.eu-central-1.compute.amazonaws.com:8080/product')
         .then(response => {
             console.log(response.data)
@@ -21,7 +20,17 @@ class ProductList extends Component {
         })
         .catch(error =>{
             console.log(error)
-        })      
+        })    
+    }
+
+    componentDidMount(){
+        this.doGetRequest()
+    }
+
+    findAllProducts = e => {
+        e.preventDefault()
+        console.log(`Attempting to retrieve all products from the AWS DB`)
+        this.doGetRequest()
     }
 
     render(){
@@ -30,7 +39,7 @@ class ProductList extends Component {
         return(
             <>
                 <div>
-                    <button onClick={this.findAllProducts}>find all products</button>
+                    <button onClick={this.findAllProducts}>Display All Products</button>
                     
                 </div>
                 <div>
