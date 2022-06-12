@@ -1,6 +1,9 @@
 import React, {useState, useRef} from 'react'
 import ProductList from './ProductList'
 import ProductForm from './ProductForm'
+import SearchBar from './SearchBar'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import './App.css'
 
 function App() {
 
@@ -29,7 +32,11 @@ function App() {
   }
 
   return (
-    <ProductForm></ProductForm>
+    <>
+      <ProductForm></ProductForm>
+      <SearchBar></SearchBar>
+      <ProductList></ProductList>
+    </>
   );
 }
 

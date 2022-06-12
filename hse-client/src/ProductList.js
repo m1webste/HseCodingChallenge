@@ -1,10 +1,49 @@
-import React from 'react'
+import React, {Component, useState, useRef} from 'react'
 import Product from './Product'
+import axios from 'axios'
 
-export default function ProductList({products}){
-    return (
-        products.map(product => {
-            return <Product key={product.id} product={product}/>
+class ProductList extends Component {
+
+    constructor(props){
+        super(props)
+        this.state = {
+            products:[]
+        }
+    }
+
+    findAllProducts = e => {
+        e.preventDefault()
+        console.log(`Attempting to retrieve all products from the AWS DB`)
+        axios.get('http://ec2-54-93-231-12.eu-central-1.compute.amazonaws.com:8080/product')
+        .then(response => {
+            console.log(response.data)
+            this.setState({products: response.data})
         })
-    )
+        .catch(error =>{
+            console.log(error)
+        })      
+    }
+
+    render(){
+        const {products} = this.state
+        console.log(`state in render: ${this.state.products}`)
+        return(
+            <>
+                <div>
+                    <button onClick={this.findAllProducts}>find all products</button>
+                    
+                </div>
+                <div>
+                    List of Products:
+                    {
+                        products.length ?
+                        products.map(p => <div key={p.id}>{p.name}</div>) :
+                        ` No Products Available`
+                    }
+                </div>
+            </>
+        )
+    }
 }
+
+export default ProductList
