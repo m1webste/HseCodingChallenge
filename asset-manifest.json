@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/HseCodingChallenge/static/css/main.5bf7a859.css",
+    "main.js": "/HseCodingChallenge/static/js/main.cd12a473.js",
+    "static/js/787.340f2253.chunk.js": "/HseCodingChallenge/static/js/787.340f2253.chunk.js",
+    "index.html": "/HseCodingChallenge/index.html",
+    "main.5bf7a859.css.map": "/HseCodingChallenge/static/css/main.5bf7a859.css.map",
+    "main.cd12a473.js.map": "/HseCodingChallenge/static/js/main.cd12a473.js.map",
+    "787.340f2253.chunk.js.map": "/HseCodingChallenge/static/js/787.340f2253.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5bf7a859.css",
+    "static/js/main.cd12a473.js"
+  ]
+}
