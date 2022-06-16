@@ -13,7 +13,8 @@ class ProductList extends Component {
 
     doGetRequest()
     {
-        axios.get('http://ec2-54-93-231-12.eu-central-1.compute.amazonaws.com:8080/product')
+        //axios.get('http://ec2-54-93-231-12.eu-central-1.compute.amazonaws.com:8080/product')
+        axios.get('http://localhost:8080/product')
         .then(response => {
             console.log(response.data)
             this.setState({products: response.data})

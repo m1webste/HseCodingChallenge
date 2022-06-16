@@ -1,8 +1,11 @@
 package com.hsecodingchallenge.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Table(name = "Product")
@@ -11,31 +14,26 @@ public class Product {
     
     @Id
     @GeneratedValue
+    @Column(name = "PRODUCT_ID")
     private Long id;
+
+    @Column(name = "NAME")
     private String name;
-    private Long categoryId;
+
+    @Column(name = "PRICE")
     private double price;
 
+    @JoinColumn(name = "FK_CATEGORY_ID")
+    @ManyToOne
+    private Category category;
+
     public Product(){
-
-    }
-
-    public Product(String name, Long categoryId, double price){
-        this.name = name;
-        this.categoryId = categoryId;
-        this.price = price;
-    }
-
-    public Product(Long id, String name, Long categoryId, double price){
-        this.name = name;
-        this.categoryId = categoryId;
-        this.price = price;
-        this.id = id;
     }
 
     @Override
     public String toString(){
-        return "{id: " + id + ", name: " + name + ", categoryId: " + categoryId + ", price: " + price + "}";
+        String categoryName = category == null? "none" : category.getName();
+        return "{id: " + id + ", name: " + name + ", price: " + price + ", category: " + categoryName + "}";
     }
 
     public Long getId() {
@@ -53,15 +51,7 @@ public class Product {
     public void setName(String name) {
         this.name = name;
     }
-    
-    public Long getCategoryId() {
-        return categoryId;
-    }
 
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
-    }
-    
     public double getPrice() {
         return price;
     }
@@ -69,6 +59,13 @@ public class Product {
     public void setPrice(double price) {
         this.price = price;
     }
+    
+    public Category getCategory() {
+        return category;
+    }
 
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
 }

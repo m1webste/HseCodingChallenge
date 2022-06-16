@@ -1,43 +1,47 @@
-import React, {useState, useRef} from 'react'
-import ProductList from './ProductList'
-import ProductForm from './ProductForm'
-import SearchBar from './SearchBar'
+import React, {useState, useEffect} from 'react'
+import ProductForm from './view/ProductForm'
+import SearchBar from './view/SearchBar'
+import ProductList from './model/ProductList'
+import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
 function App() {
 
-  const [products, setProducts] = useState([])
-  const productIdRef = useRef(0) 
-  const productNameRef = useRef(1) 
-  const productCategoryRef = useRef(2) 
-  const productPriceRef = useRef(3) 
+    const [allProducts, setAllProducts] = useState([])
+    const [availableSearchBarOptions, setAvailableSearchBarOptions] = useState([])
 
-  function handleAddProduct(e){
-    const id_in = productIdRef.current.value
-    const name = productIdRef.current.value
-    const category = productIdRef.current.value
-    const price = productIdRef.current.value
+    useEffect(() => {
+      refreshAllProducts();
+    }, []);
 
-    if (id_in === '' || name === '' || category === '' || price === '') return 
+    function refreshAllProducts(){
+      //axios.get('http://ec2-54-93-231-12.eu-central-1.compute.amazonaws.com:8080/products')
+      axios.get('http://localhost:8080/products')
+      .then(response => {
+          console.log(response.data)
+          setAllProducts(response.data);
+      })
+      .catch(error =>{
+          console.log(error)
+      })    
+    }
 
-    setProducts(prevProducts => {
-      return [...prevProducts, {id:id_in, name:name, category:category, price:price}]
-    })
-
-    productIdRef.current.value = null
-    productNameRef.current.value = null
-    productCategoryRef.current.value = null
-    productPriceRef.current.value = null
-  }
-
-  return (
-    <>
-      <ProductForm></ProductForm>
-      <SearchBar></SearchBar>
-      <ProductList></ProductList>
-    </>
-  );
+    function searchBarInputChangeHandler(event){
+        if(event.target.value === ""){
+            setAvailableSearchBarOptions([])
+        }
+        else{
+            const newOptions = allProducts.filter(option => option.name.includes(event.target.value))
+            setAvailableSearchBarOptions(newOptions)
+        }
+    }
+  
+    return (
+      <>
+        <SearchBar options={availableSearchBarOptions} onInputChange={searchBarInputChangeHandler} />
+      </>
+    );
 }
 
 export default App;
