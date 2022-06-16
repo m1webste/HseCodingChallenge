@@ -52,8 +52,11 @@ public class Category {
         this.parent = parent;
     }
 
-    
-
-    
+    public void overrideWithNewInfo(Category newCategory)
+    {
+        this.id = newCategory.id;
+        this.name = newCategory.name;
+        this.parent = newCategory.parent;
+    }
     
 }

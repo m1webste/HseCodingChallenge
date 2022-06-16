@@ -68,4 +68,12 @@ public class Product {
         this.category = category;
     }
 
+    public void overrideWithNewInfo(Product newProduct)
+    {
+        this.id = newProduct.id;
+        this.name = newProduct.name;
+        this.price = newProduct.price;
+        this.category = newProduct.getCategory();
+    }
+
 }
