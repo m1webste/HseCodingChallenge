@@ -1,13 +1,14 @@
 import React, {useState, useEffect} from 'react'
-import SearchBar from '../component/SearchBar'
 import axios from 'axios'
 import { WsApiConstants } from '../constants';
+import SearchBar from '../component/SearchBar'
 import ProductList from '../component/ProductList';
 
 export default function SearchPage() {
 
     const [allProducts, setAllProducts] = useState([])
     const [availableSearchBarOptions, setAvailableSearchBarOptions] = useState([])
+    const [selectedProducts, setSelectedProducts] = useState([])
 
     useEffect(() => {
         refreshAllProducts();
@@ -34,14 +35,17 @@ export default function SearchPage() {
         }
     }
 
-    function searchClickHandler(inputRef){
-
+    function searchClickHandler(inputRefValue){
+        console.log(`input ref`+ inputRefValue)
+        const filteredProducts = allProducts.filter(option => option.name === inputRefValue)
+        setSelectedProducts(filteredProducts)
+        console.log(`selectedProducts`+ selectedProducts)
     }
 
     return (
         <>
             <SearchBar options={availableSearchBarOptions} onInputChange={searchBarInputChangeHandler} onSearch={searchClickHandler}/>
-            <ProductList></ProductList>
+            <ProductList products={selectedProducts}></ProductList>
         </>
     );
 }

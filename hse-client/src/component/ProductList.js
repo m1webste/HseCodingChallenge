@@ -1,44 +1,37 @@
-import React, {useState, useEffect} from 'react'
-import axios from 'axios'
+import React, {useEffect} from 'react'
 
-export default function ProductList(){
-
-    const [products, setProducts] = useState([])
+export default function ProductList(props){
 
     useEffect(() => {
-        refreshProductList()
-    }, []);
-
-    function findAllProducts(event){
-        event.preventDefault()
-        console.log(`Attempting to retrieve all products from the AWS DB`)
-        this.refreshProductList()
-    }
-
-    function refreshProductList(){
-        axios.get('http://ec2-54-93-231-12.eu-central-1.compute.amazonaws.com:8080/product/all')
-        .then(response => {
-            console.log(response.data)
-            setProducts(response.data)
-        })
-        .catch(error =>{
-            console.log(error)
-        })    
-    }
+        console.log(`products in ProductList: ${props.products.length}`)
+    });
 
     return(
-        <>
-            <div>
-                <button onClick={findAllProducts}>Display All Products</button>
-                
-            </div>
-            <div>
-                {
-                    products.length ?
-                    products.map(p => <div key={p.id}>{p.name}</div>) :
-                    `No Products Available`
-                }
-            </div>
-        </>
+        <div className="product-list">
+            {
+                props.products.length ?
+                props.products.map(p => 
+                <div className="product-list-table" key={p.id}>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>ID: </td>
+                                <td>{p.id}</td>
+                            </tr>
+                            <tr>
+                                <td>Name: </td>
+                                <td>{p.name}</td>
+                            </tr>
+                            <tr>
+                                <td>Price: </td>
+                                <td>{p.price}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                ) :
+                `No Products To Display`
+            }
+        </div>
     )
 }
