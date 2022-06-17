@@ -7,7 +7,6 @@ export default function Product({product})
             <label>
                 {product.id}
                 {product.name}
-                {product.category}
                 {product.price}
             </label>
         </div>
